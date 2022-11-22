@@ -1,0 +1,5 @@
+D:\ProgramData\MicrosoftSource\repos\GISTools\bin\publish\GISTools.exe
+D:\ProgramData\MicrosoftSource\repos\GISTools\bin\publish\GISTools.dll
+D:\ProgramData\MicrosoftSource\repos\GISTools\bin\publish\GISTools.deps.json
+D:\ProgramData\MicrosoftSource\repos\GISTools\bin\publish\GISTools.runtimeconfig.json
+D:\ProgramData\MicrosoftSource\repos\GISTools\bin\publish\GISTools.pdb
