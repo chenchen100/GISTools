@@ -558,12 +558,12 @@ namespace GISTools
         //■■■■■■■■■■■■■■■■■■■■开源协议■■■■■■■■■■■■■■■■■■■■
         private void button5_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer.exe", "https://opensource.org/licenses/MIT");
+            //System.Diagnostics.Process.Start("explorer.exe", "https://opensource.org/licenses/MIT");
         }
         //■■■■■■■■■■■■■■■■■■■■Github■■■■■■■■■■■■■■■■■■■■
         private void button6_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer.exe", "https://opensource.org/licenses/MIT");
+            System.Diagnostics.Process.Start("explorer.exe", "https://github.com/chenchen100/GISTools");
         }
         //■■■■■■■■■■■■■■■■■■■■捐赠■■■■■■■■■■■■■■■■■■■■
         private void button7_Click(object sender, EventArgs e)
