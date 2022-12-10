@@ -1,2 +1,0 @@
-D:\ProgramData\MicrosoftSource\repos\GISTools\bin\publish\GISTools.pdb
-D:\ProgramData\MicrosoftSource\repos\GISTools\bin\publish\GISTools.exe
