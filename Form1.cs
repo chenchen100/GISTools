@@ -558,7 +558,7 @@ namespace GISTools
         //■■■■■■■■■■■■■■■■■■■■开源协议■■■■■■■■■■■■■■■■■■■■
         private void button5_Click(object sender, EventArgs e)
         {
-            //System.Diagnostics.Process.Start("explorer.exe", "https://opensource.org/licenses/MIT");
+            System.Diagnostics.Process.Start("explorer.exe", "https://opensource.org/licenses");
         }
         //■■■■■■■■■■■■■■■■■■■■Github■■■■■■■■■■■■■■■■■■■■
         private void button6_Click(object sender, EventArgs e)
@@ -568,7 +568,7 @@ namespace GISTools
         //■■■■■■■■■■■■■■■■■■■■捐赠■■■■■■■■■■■■■■■■■■■■
         private void button7_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("explorer.exe", "https://opensource.org/licenses/MIT");
+            System.Diagnostics.Process.Start("explorer.exe", "https://gitee.com/chenchen1001/GISTools");
         }
         //■■■■■■■■■■■■■■■■■■■■博客讨论、反馈■■■■■■■■■■■■■■■■■■■■
         private void button8_Click(object sender, EventArgs e)
