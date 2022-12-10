@@ -319,6 +319,100 @@ namespace GISTools
                 return BF;
             }
         }
+        //■■■■■■■■■■■■■■■■■■■■WGS84坐标加偏为gcj02■■■■■■■■■■■■■■■■■■■■
+        //WGS84坐标加偏为gcj02
+        public double[] wgs84togcj02(double J, double W)
+        {
+            double[] array = new double[2];
+            if (!out_of_china(J, W))
+            {
+                array[0] = J;
+                array[1] = W;
+                return array;
+            }
+            else
+            {
+                double dW = transformJ(J - 105.0, W - 35.0);
+                double dJ = transformW(J - 105.0, W - 35.0);
+                double radW = W / 180.0 * pi;
+                double magic = Math.Sin(radW);
+                magic = 1 - ee * magic * magic;
+                double sqrtmagic = Math.Sqrt(magic);
+                dW = (dW * 180.0) / ((a * (1 - ee)) / (magic * sqrtmagic) * pi);
+                dJ = (dJ * 180.0) / (a / sqrtmagic * Math.Cos(radW) * pi);
+                double mgW = W + dW;
+                double mgJ = J + dJ;
+                array[1] = mgW;
+                array[0] = mgJ;
+                return array;
+            }
+        }
+
+        //■■■■■■■■■■■■■■■■■■■■gcj02转bd09■■■■■■■■■■■■■■■■■■■■
+        //gcj02转bd09
+        public double[] gcj02tobd09(double J, double W)
+        {
+            double[] array = new double[2];
+            if (!out_of_china(J, W))
+            {
+                array[0] = J;
+                array[1] = W;
+                return array;
+            }
+            else
+            {
+                double a = Math.Sqrt(J * J + W * W) + 0.00002 * Math.Sin(W * Math.PI);
+                double b = Math.Atan2(W,J)+0.000003*Math.Cos(J*Math.PI);
+                array[0] = a * Math.Cos(b) + 0.0065;
+                array[1] = a * Math.Sin(b) + 0.006;
+                return array;
+            }
+        }
+
+        //■■■■■■■■■■■■■■■■■■■■bd09转gcj02■■■■■■■■■■■■■■■■■■■■
+        //bd09转gcj02
+        public double[] bd09togcj02(double J, double W)
+        {
+            double[] array = new double[2];
+            if (!out_of_china(J, W))
+            {
+                array[0] = J;
+                array[1] = W;
+                return array;
+            }
+            else
+            {
+                double a = J - 0.0065;
+                double b = W - 0.006;
+                double c = Math.Sqrt(a*a + b*b)-0.00002*Math.Sin(b*Math.PI);
+                double d = Math.Atan2(b,a)-0.000003*Math.Cos(a*Math.PI);
+                array[0] = c * Math.Cos(d);
+                array[1] = c * Math.Sin(d);
+                return array;
+            }
+        }
+
+        //■■■■■■■■■■■■■■■■■■■■wgs84转bd09■■■■■■■■■■■■■■■■■■■■
+        //wgs84转bd09
+        public double[] wgs84tobd09(double J, double W)
+        {
+            double[] array1 = new double[2];
+            double[] array2 = new double[2];
+            array1 =wgs84togcj02(J, W);
+            array2 = gcj02tobd09(array1[0], array1[1]);
+            return array2;
+        }
+
+        //■■■■■■■■■■■■■■■■■■■■bd09转wgs84■■■■■■■■■■■■■■■■■■■■
+        //bd09转wgs84
+        public double[] bd09towgs84(double J, double W)
+        {
+            double[] array1 = new double[2];
+            double[] array2 = new double[2];
+            array1 = bd09togcj02(J, W);
+            array2 = gcj02towgs84(array1[0], array1[1]);
+            return array2;
+        }
 
         //■■■■■■■■■■■■■■■■■■■■经纬度转投影坐标■■■■■■■■■■■■■■■■■■■■
         public double[] GaussProjection(double J, double W, double H, double CJ, string Ttype)
@@ -438,19 +532,23 @@ namespace GISTools
             String Ttype = "";
             if (radioButton1.Checked)
             {
+                // CGCS2000
                 Ttype = "1";
             }
             else if (radioButton2.Checked)
             {
-                Ttype = "2";
+                // WGS84
+                Ttype = "4";
             }
             else if (radioButton3.Checked)
             {
-                Ttype = "3";
+                // Xian80
+                Ttype = "2";
             }
             else if (radioButton4.Checked)
             {
-                Ttype = "4";
+                // Beijing54
+                Ttype = "3";
             }
             return Ttype;
         }
